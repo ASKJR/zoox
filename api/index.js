@@ -31,14 +31,14 @@ app.use(bodyParser.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use(checkForApiKey);
-
 app.get('/api', (req, res) => {
   res.status(200).json({
     status: 'success',
     message: 'healthcheck',
   });
 });
+
+app.use(checkForApiKey);
 
 app.use('/api/v1', apiV1);
 
