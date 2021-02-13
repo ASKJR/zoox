@@ -8,7 +8,7 @@ networks:
 services:
   gb-api:
     build: .
-    container_name: zoox-api
+    container_name: web.zoox-api
     environment:
       - VIRTUAL_HOST=zoox-api
       - VIRTUAL_PORT=3000
