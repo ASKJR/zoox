@@ -10,7 +10,7 @@
     }
   },
   "host": "",
-  "basePath": "/",
+  "basePath": "",
   "tags": [
     {
       "name": "Estado",
