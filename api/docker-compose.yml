@@ -6,7 +6,7 @@ networks:
       name: main
 
 services:
-  gb-api:
+  zoox-api:
     build: .
     container_name: web.zoox-api
     environment:
@@ -22,4 +22,4 @@ services:
       - /application/node_modules
     working_dir: /application
     entrypoint: npm
-    command: run dev
+    command: run production
