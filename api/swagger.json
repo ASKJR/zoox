@@ -1,0 +1,245 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "ZOOX API",
+    "description": "API para o gerenciamento de cidades e estados do Brasil.",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Estado",
+      "description": "CRUD de estado"
+    },
+    {
+      "name": "Cidade",
+      "description": "CRUD de cidade"
+    }
+  ],
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "APIKeyHeader": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-Api-Key"
+    }
+  },
+  "security": [
+    {
+      "APIKeyHeader": []
+    }
+  ],
+  "paths": {
+    "/estados": {
+      "post": {
+        "tags": ["Estado"],
+        "summary": "Adicionar um novo estado.",
+        "description": "",
+        "operationId": "addEstado",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Estado"
+            }
+          }
+        ],
+        "responses": {}
+      },
+      "get": {
+        "tags": ["Estado"],
+        "summary": "Lista os estados.",
+        "description": "Filtre por nome ou sigla.",
+        "operationId": "getEstados",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "description": "Filtre pelo nome do estado.",
+            "type": "string"
+          },
+          {
+            "name": "sigla",
+            "in": "query",
+            "description": "Filtre pela sigla do estado.",
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/estados/{_id}": {
+      "put": {
+        "tags": ["Estado"],
+        "summary": "Atualizar um estado.",
+        "description": "",
+        "operationId": "updateEstado",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "description": "Digite o _id do estado para atulização.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Estado"
+            }
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "tags": ["Estado"],
+        "summary": "Deletar um estado.",
+        "description": "",
+        "operationId": "deleteEstado",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "description": "Id do estado que será utilizado na operação de delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/cidades": {
+      "post": {
+        "tags": ["Cidade"],
+        "summary": "Adicionar uma nova cidade em um estado.",
+        "description": "",
+        "operationId": "addCidade",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cidade"
+            }
+          }
+        ],
+        "responses": {}
+      },
+      "get": {
+        "tags": ["Cidade"],
+        "summary": "Lista as cidades.",
+        "description": "Filtre por nome ou _idEstado.",
+        "operationId": "getCidades",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "description": "Filtre pelo nome da cidade.",
+            "type": "string"
+          },
+          {
+            "name": "_idEstado",
+            "in": "query",
+            "description": "Filtre as cidades pelo id do estado.",
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/cidades/{_id}": {
+      "put": {
+        "tags": ["Cidade"],
+        "summary": "Atualizar uma cidade de um estado.",
+        "description": "",
+        "operationId": "updateCidade",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "description": "Digite o _id da cidade para atulização.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cidade"
+            }
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "tags": ["Cidade"],
+        "summary": "Deletar uma cidade de um estado.",
+        "description": "",
+        "operationId": "deleteCidade",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "description": "Id da cidade que será utilizado na operação de delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    }
+  },
+  "definitions": {
+    "Estado": {
+      "required": ["nome", "sigla"],
+      "properties": {
+        "nome": {
+          "type": "string"
+        },
+        "sigla": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2
+        }
+      }
+    },
+    "Cidade": {
+      "required": ["nome", "_idEstado"],
+      "properties": {
+        "nome": {
+          "type": "string"
+        },
+        "_idEstado": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
