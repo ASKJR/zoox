@@ -10,10 +10,11 @@ services:
     build: .
     container_name: web.zoox-api
     environment:
-      - VIRTUAL_HOST=zoox-api
+      - NODE_ENV=development
+      - VIRTUAL_HOST=zoox-api.albertokato.com.br
       - VIRTUAL_PORT=3000
     expose:
-      - '3000'
+      - "3000"
     external_links:
       - nginx-proxy.web-base
     volumes:
