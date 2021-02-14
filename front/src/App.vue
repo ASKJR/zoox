@@ -1,17 +1,26 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <app-banner title="ZOOX" subtitle="Estados & Cidades"></app-banner>
+    <div class="container">
+      <div class="columns block">
+        <div class="column is-12">
+          <app-table></app-table>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Banner from './components/Banner';
+import Table from './components/Table';
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    appBanner: Banner,
+    appTable: Table,
+  },
+};
 </script>
 
 <style>
