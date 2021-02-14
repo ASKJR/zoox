@@ -16,7 +16,7 @@
             :loadedData="cidades"
             :asyncCall="false"
             :cols="colsForCidades"
-            v-if="cidades !== null"
+            v-if="cidades"
             title="Cidades"
           ></app-table>
         </div>
@@ -49,10 +49,9 @@ export default {
   },
   methods: {
     async getCidades(id) {
+      this.cidades = null;
       const data = await ZooxApiService.getCidades(`?_idEstado=${id}`);
-      if (data.length === 0) {
-        this.cidades = null;
-      } else {
+      if (data.length > 0) {
         this.cidades = data;
       }
     },
