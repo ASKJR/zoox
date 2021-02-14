@@ -22,7 +22,7 @@ const app = express();
 const corsOpts = {
   origin: '*',
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Api-Key'],
 };
 
 app.use(cors(corsOpts));
