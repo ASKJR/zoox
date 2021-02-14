@@ -1,24 +1,14 @@
-# front
+# zoox 
 
-## Project setup
-```
-npm install
-```
+### Frontend tech
+<ul>
+  <li>Vue.js 2</li>
+  <li>Buefy</li>
+  <li>Axios</li>
+  <li> Vue CLI</li>
+  <li> Docker </li>
+  <li>Eslint - Default Vue CLI</li>
+</ul>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Application URL
+https://zoox.albertokato.com.br/
