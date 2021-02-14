@@ -16,7 +16,6 @@ dotenv.config({
 });
 
 swaggerDocument.host = process.env.BASE_URL;
-swaggerDocument.basePath = process.env.BASE_PATH;
 
 const app = express();
 
