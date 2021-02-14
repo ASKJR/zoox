@@ -1,103 +1,75 @@
 <template>
-  <section>
-    <b-field>
-      <b-button
-        label="Clear selected"
-        type="is-danger"
-        icon-left="close"
-        :disabled="!selected"
-        @click="selected = null"
-      />
-    </b-field>
+  <div>
+    <section>
+      <h1 class="title">{{ tableName }}</h1>
+      <b-field>
+        <b-button
+          label="Clear selected"
+          type="is-danger"
+          icon-left="close"
+          :disabled="!selected"
+          @click="selected = null"
+        />
+      </b-field>
 
-    <b-tabs>
-      <b-tab-item label="Table">
-        <b-table
-          :data="data"
-          :columns="columns"
-          :selected.sync="selected"
-          focusable
-        >
-        </b-table>
-      </b-tab-item>
+      <b-tabs>
+        <b-tab-item label="Table">
+          <b-table
+            :data="data"
+            :columns="columns"
+            :selected.sync="selected"
+            :paginated="isPaginated"
+            :per-page="perPage"
+            :pagination-simple="isPaginationSimple"
+            :sort-icon="sortIcon"
+            :sort-icon-size="sortIconSize"
+            :default-sort-direction="defaultSortDirection"
+            default-sort="nome"
+            @click="(row, index) => fetchCidades(row)"
+            focusable
+          >
+          </b-table>
+        </b-tab-item>
 
-      <b-tab-item label="Selected">
-        <pre>{{ selected }}</pre>
-      </b-tab-item>
-    </b-tabs>
-  </section>
+        <b-tab-item label="Selected">
+          <pre>{{ selected }}</pre>
+        </b-tab-item>
+      </b-tabs>
+    </section>
+  </div>
 </template>
 
 <script>
 export default {
+  props: {
+    loadedData: Array,
+    asyncCall: Boolean,
+    cols: Array,
+    title: String,
+  },
   data() {
-    const data = [
-      {
-        id: 1,
-        first_name: 'Jesse',
-        last_name: 'Simmons',
-        date: '2016-10-15 13:43:27',
-        gender: 'Male',
-      },
-      {
-        id: 2,
-        first_name: 'John',
-        last_name: 'Jacobs',
-        date: '2016-12-15 06:00:53',
-        gender: 'Male',
-      },
-      {
-        id: 3,
-        first_name: 'Tina',
-        last_name: 'Gilbert',
-        date: '2016-04-26 06:26:28',
-        gender: 'Female',
-      },
-      {
-        id: 4,
-        first_name: 'Clarence',
-        last_name: 'Flores',
-        date: '2016-04-10 10:28:46',
-        gender: 'Male',
-      },
-      {
-        id: 5,
-        first_name: 'Anne',
-        last_name: 'Lee',
-        date: '2016-12-06 14:38:38',
-        gender: 'Female',
-      },
-    ];
+    const data = this.loadedData;
 
     return {
       data,
-      selected: data[1],
-      columns: [
-        {
-          field: 'id',
-          label: 'ID',
-          width: '40',
-          numeric: true,
-        },
-        {
-          field: 'first_name',
-          label: 'First Name',
-        },
-        {
-          field: 'last_name',
-          label: 'Last Name',
-        },
-        {
-          field: 'date',
-          label: 'Date',
-          centered: true,
-        },
-        {
-          field: 'gender',
-          label: 'Gender',
-        },
-      ],
+      tableName: this.title,
+      defaultOpenedDetails: [1],
+      selected: null,
+      isPaginated: true,
+      perPage: 5,
+      isPaginationSimple: false,
+      defaultSortDirection: 'asc',
+      sortIcon: 'arrow-up',
+      sortIconSize: 'is-small',
+      columns: this.cols,
     };
+  },
+  methods: {
+    fetchCidades(row) {
+      if (this.asyncCall) {
+        this.$emit('fetchCidades', row._id);
+      }
+    },
   },
 };
 </script>
